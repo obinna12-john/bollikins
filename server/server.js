@@ -149,6 +149,78 @@ app.post('/api/orders', async (req, res) => {
 })
 
 
+// TRACK ORDER
+
+app.get('/api/orders/track', async (req, res) => {
+
+  const { reference, email } = req.query
+
+  if (!reference || !email) {
+    return res.status(400).json({
+      success: false,
+      message: 'Order reference and email are required'
+    })
+  }
+
+  try {
+
+    const { data: order, error: orderError } = await supabase
+      .from('orders')
+      .select('*')
+      .eq('payment_reference', reference)
+      .eq('email', email)
+      .single()
+
+    if (orderError || !order) {
+
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found. Check your reference and email.'
+      })
+
+    }
+
+    const { data: items, error: itemsError } = await supabase
+      .from('order_items')
+      .select('*')
+      .eq('order_id', order.id)
+
+    if (itemsError) {
+
+      console.error(
+        'Track order items error:',
+        itemsError
+      )
+
+      return res.status(500).json({
+        success: false,
+        message: 'Unable to retrieve order items'
+      })
+
+    }
+
+    res.json({
+      success: true,
+      order: {
+        ...order,
+        items: items || []
+      }
+    })
+
+  } catch (error) {
+
+    console.error(
+      'Track order error:',
+      error
+    )
+
+    res.status(500).json({
+      success: false,
+      message: 'Server error while tracking order'
+    })
+  }
+
+})
 // START SERVER
 
 const PORT = process.env.PORT || 5000
