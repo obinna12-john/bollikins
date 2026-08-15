@@ -1966,6 +1966,39 @@ nav {
     text-align: center;
   }
 }
+
+/* =========================================================
+   CONTACT
+========================================================= */
+/* Contact */
+
+.contact-section {
+  padding: 55px 5% 75px;
+}
+
+.contact-section .section-heading {
+  margin-bottom: 35px;
+}
+
+.contact-info {
+  padding: 28px 18px;
+}
+
+.contact-info h3 {
+  font-size: 24px;
+}
+
+.contact-info > p {
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  margin-bottom: 30px;
+}
+
+.contact-detail {
+  padding: 20px 14px;
+}
 /* .counter {
   font-size: 16px;
   padding: 5px 10px;

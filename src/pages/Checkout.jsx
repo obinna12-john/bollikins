@@ -39,73 +39,73 @@ function Checkout() {
       currency: 'NGN',
 
       onSuccess: async (transaction) => {
-  console.log('Paystack transaction:', transaction)
+        console.log('Paystack transaction:', transaction)
 
-  try {
-    // Step 1: Ask our backend to verify the payment
-    const response = await fetch(
-      `http://localhost:5000/api/verify-payment/${transaction.reference}`
-    )
+        try {
+          // Step 1: Ask our live backend to verify the payment
+          const response = await fetch(
+            `https://bollikins-api.onrender.com/api/verify-payment/${transaction.reference}`
+          )
 
-    const data = await response.json()
+          const data = await response.json()
 
-    console.log('Verification response:', data)
+          console.log('Verification response:', data)
 
-    if (data.success) {
+          if (data.success) {
 
-      const order = {
-        customer: formData,
-        products: cart,
-        total: cartTotal,
-        paymentReference: transaction.reference
-      }
+            const order = {
+              customer: formData,
+              products: cart,
+              total: cartTotal,
+              paymentReference: transaction.reference
+            }
 
-      console.log('Verified order:', order)
+            console.log('Verified order:', order)
 
-      // Step 3: Send the verified order to our backend
-      const orderResponse = await fetch(
-        'http://localhost:5000/api/orders',
-        {
-          method: 'POST',
+            // Step 3: Send the verified order to our live backend
+            const orderResponse = await fetch(
+              'https://bollikins-api.onrender.com/api/orders',
+              {
+                method: 'POST',
 
-          headers: {
-            'Content-Type': 'application/json'
-          },
+                headers: {
+                  'Content-Type': 'application/json'
+                },
 
-          body: JSON.stringify(order)
+                body: JSON.stringify(order)
+              }
+            )
+
+            const orderData = await orderResponse.json()
+
+            console.log('Saved order:', orderData)
+
+            if (orderData.success) {
+              alert(
+                'Payment successful! Your order has been confirmed.'
+              )
+            }
+
+          } else {
+
+            alert(
+              'We could not verify your payment. Please contact us.'
+            )
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            'Payment verification failed:',
+            error
+          )
+
+          alert(
+            'There was a problem verifying your payment.'
+          )
         }
-      )
-
-      const orderData = await orderResponse.json()
-
-      console.log('Saved order:', orderData)
-
-      if (orderData.success) {
-        alert(
-          'Payment successful! Your order has been confirmed.'
-        )
-      }
-
-    } else {
-
-      alert(
-        'We could not verify your payment. Please contact us.'
-      )
-
-    }
-
-  } catch (error) {
-
-    console.error(
-      'Payment verification failed:',
-      error
-    )
-
-    alert(
-      'There was a problem verifying your payment.'
-    )
-  }
-},
+      },
 
       onCancel: () => {
         console.log('Payment cancelled')
@@ -127,12 +127,13 @@ function Checkout() {
       <nav>
         <div className="nav-brand">
 
-    <img
-      src="/images/logo.png"
-      alt="Boxed by Bollikins"
-      className="nav-logo-image"
-    />
-    </div>
+          <img
+            src="/images/logo.png"
+            alt="Boxed by Bollikins"
+            className="nav-logo-image"
+          />
+
+        </div>
 
         <div className="logo">
           BOXED BY BOLLIKINS
@@ -141,8 +142,8 @@ function Checkout() {
         <div className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
-          {/* <a href="#">About</a>
-          <a href="#">Contact</a> */}
+          {/* <a href="#">About</a> */}
+          <Link to="/contact">Contact</Link>
         </div>
 
         <Link
@@ -167,6 +168,7 @@ function Checkout() {
           <h2>
             Complete Your Order
           </h2>
+
         </div>
 
 
@@ -186,8 +188,6 @@ function Checkout() {
                 handlePayment()
               }}
             >
-
-
 
               <div className="form-group">
 
@@ -276,6 +276,7 @@ function Checkout() {
 
               </div>
 
+
               <div className="form-group">
 
                 <label>
@@ -303,7 +304,6 @@ function Checkout() {
             </form>
 
           </div>
-
 
 
           <div className="checkout-summary">

@@ -98,6 +98,7 @@ function Rooms() {
   <div className="nav-links">
     <Link to="/">Home</Link>
     <Link to="/shop">Shop</Link>
+    <Link to="/contact">Contact</Link>
   </div>
 
   {/* CART */}
