@@ -99,6 +99,7 @@ function Rooms() {
     <Link to="/">Home</Link>
     <Link to="/shop">Shop</Link>
     <Link to="/contact">Contact</Link>
+    <Link to="/my-orders">My Orders</Link>
   </div>
 
   {/* CART */}

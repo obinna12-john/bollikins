@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { CartProvider } from './context/CartContext'
+import Login from './pages/Login'
+import TrackOrder from './pages/TrackOrder'
+import Dashboard from './pages/Dashboard'
 import Rooms from './pages/Rooms'
 import CashGifts from './pages/CashGifts'
 import GiftItems from './pages/GiftItems'
 import TreatCorner from './pages/TreatCorner'
 
 import Home from './pages/Home'
+import MyOrders from './pages/MyOrders'
 import Shop from './pages/Shop'
 import Cart from './pages/Cart'
 import Contact from './pages/Contact'
@@ -20,6 +24,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/track-order" element={<TrackOrder />}/>
+          <Route path="/my-orders" element={<MyOrders />}/>
           <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
