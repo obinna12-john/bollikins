@@ -40,7 +40,7 @@ function Contact() {
           Cart ({cartCount})
         </Link>
       </nav>
-
+g
       {/* Contact Section */}
       <section className="contact-section">
 
@@ -71,6 +71,12 @@ function Contact() {
               <div className="contact-detail">
                 <span>Email</span>
                 <p>mobolajiodeyemi19@gmail.com</p>
+              </div>
+              <div className="contact-detail">
+                <span>Message Bollikins Gifts and Surprises on Whatsapp</span>
+                <p><a href="https://wa.me/message/27VPZJSHHF5DE1" target="_blank" rel="noopener noreferrer">
+                  Chat on WhatsApp
+                </a></p>
               </div>
 
             </div>

@@ -21,7 +21,7 @@ function Rooms() {
     {
       id: 'room-package-2',
       name: 'Proposal Set Up',
-      price: 43000,
+      price: 56500,
       description:
         'An elegant room decoration designed to create a memorable surprise.',
       image: '/images/decorated3.jpg'
@@ -31,7 +31,7 @@ function Rooms() {
   const customRoom = {
     id: 'room-custom',
     name: 'Custom Room Setup',
-    price: 38500
+    price: 43500
   }
 
   const colourThemes = [
